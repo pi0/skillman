@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/pi0/skillman/compare/v0.0.3...v0.0.4)
+
+### 🚀 Enhancements
+
+- Add `$schema` ([80c2121](https://github.com/pi0/skillman/commit/80c2121))
+
+### 🏡 Chore
+
+- Update assets ([ae4ed09](https://github.com/pi0/skillman/commit/ae4ed09))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](https://github.com/pi0))
+
 ## v0.0.3
 
 [compare changes](https://github.com/pi0/skillman/compare/v0.0.2...v0.0.3)
