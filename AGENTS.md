@@ -10,6 +10,7 @@
 src/
 ├── cli.ts              # CLI entry point with parseArgs
 ├── config.ts           # skills.json config management
+├── detect.ts           # Project stack detection
 ├── skills.ts           # Skills CLI execution
 └── utils/
     ├── colors.ts       # ANSI color codes for terminal output
@@ -30,6 +31,10 @@ test/index.test.ts      # Tests using vitest
 - `findSkillsBinary(options?)` — Finds local `skills` binary in node_modules/.bin (options: `{ cache? }`, cached by default)
 - `installSkills(options?)` — Spawns `skills add` for each source with progress logging; options: `{ cwd?, agents?, global?, yes? }`
 - `installSkillSource(entry, options)` — Installs a single skill source; options: `{ cwd?, agents?, global?, yes?, prefix? }`
+
+### Detect (src/detect.ts)
+
+- `detectSkills(options?)` — Detects project stack using `skills-detector` and saves to `skills.json`; options: `{ cwd? }`
 
 ### CLI Entry (src/cli.ts)
 
@@ -71,6 +76,7 @@ interface SkillSource {
 skillman                                    # Install skills (default)
 skillman install, i [--global] [--agent <name>...]  # Install skills from skills.json
 skillman add <source>... [--agent <name>...]  # Add skill source(s) to skills.json
+skillman detect                             # Detect project stack and save to skills.json
 ```
 
 ### Source Format

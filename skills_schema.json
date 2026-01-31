@@ -30,6 +30,51 @@
           }
         }
       }
+    },
+    "detected": {
+      "type": "object",
+      "description": "Auto-detected project environment information",
+      "properties": {
+        "packageManager": {
+          "type": ["string", "null"],
+          "description": "Detected package manager (npm, yarn, pnpm, bun, deno)"
+        },
+        "frameworks": {
+          "type": "array",
+          "description": "Detected frameworks (e.g., nextjs, remix, rails, django)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "languages": {
+          "type": "array",
+          "description": "Detected programming languages (e.g., typescript, python, go)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools": {
+          "type": "array",
+          "description": "Detected tools and libraries (e.g., prisma, tailwind, docker)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "testing": {
+          "type": "array",
+          "description": "Detected testing frameworks (e.g., vitest, jest, playwright)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "searchTerms": {
+          "type": "array",
+          "description": "Combined search terms for skill discovery",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }

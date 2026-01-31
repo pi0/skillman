@@ -13,5 +13,26 @@
         "skill-creator"
       ]
     }
-  ]
+  ],
+  "detected": {
+    "packageManager": "pnpm",
+    "frameworks": [],
+    "languages": [
+      "typescript",
+      "javascript"
+    ],
+    "tools": [],
+    "testing": [
+      "vitest",
+      "pytest",
+      "minitest"
+    ],
+    "searchTerms": [
+      "javascript",
+      "minitest",
+      "pytest",
+      "typescript",
+      "vitest"
+    ]
+  }
 }

@@ -38,12 +38,23 @@ This creates a `skills.json` file:
 }
 ```
 
+**Auto detect skills for current project:**
+
+```bash
+npx skillman detect
+```
+
+<p align="center">
+  <img src="./assets/detect.svg" alt="Install preview">
+</p>
+
 ## CLI Usage
 
 ```sh
 npx skillman                    # Install skills from skills.json (default)
 npx skillman install, i         # Same as above
 npx skillman add <source>...    # Add skill source(s) to skills.json
+npx skillman detect             # Detect project stack and save to skills.json
 ```
 
 ### Commands
@@ -74,6 +85,14 @@ npx skillman add <source>... [options]
 | ---------------- | ------------------------------------------------- |
 | `--agent <name>` | Target agent (default: `claude-code`, repeatable) |
 | `-h, --help`     | Show help                                         |
+
+#### `detect`
+
+Detects project stack (frameworks, languages, tools) and saves the information to `skills.json`. Uses [`skills-detector`](https://github.com/vercel-labs/skills-detector) under the hood.
+
+```sh
+npx skillman detect
+```
 
 ### Source Formats
 
@@ -115,6 +134,9 @@ npx skillman install --global
 
 # Install for multiple agents
 npx skillman install --agent claude-code --agent cursor
+
+# Detect project stack
+npx skillman detect
 ```
 
 ## Development
