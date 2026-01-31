@@ -46,15 +46,15 @@ export async function installSkills(options: InstallSkillsOptions = {}): Promise
   for (const entry of config.skills) {
     i++;
     const skillList =
-      entry.skills.length > 0 ? ` ${c.dim}(${entry.skills.join(", ")})${c.reset}` : "";
+      (entry.skills?.length || 0) > 0 ? ` ${c.dim}(${entry.skills!.join(", ")})${c.reset}` : "";
     console.log(`${c.cyan}◐${c.reset} [${i}/${total}] Installing ${entry.source}${skillList}`);
 
     const [command, args] = skillsBinary
       ? [skillsBinary, ["add", entry.source]]
       : ["npx", ["skills", "add", entry.source]];
 
-    if (entry.skills.length > 0) {
-      args.push("--skill", ...entry.skills);
+    if ((entry.skills?.length || 0) > 0) {
+      args.push("--skill", ...entry.skills!);
     } else {
       args.push("--skill", "*");
     }

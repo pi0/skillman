@@ -8,7 +8,7 @@ export interface SkillsConfig {
 
 export interface SkillSource {
   source: string;
-  skills: string[];
+  skills?: string[];
 }
 
 export interface SkillsConfigResult {
