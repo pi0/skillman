@@ -6,7 +6,7 @@ Manage project Agent [skills](https://skills.sh/) from `skills.json`. Uses [`ski
 
 **Install all skills from `skills.json`:**
 
-```sh
+```bash
 npx skillman
 ```
 
@@ -16,8 +16,10 @@ npx skillman
 
 **Add new skills to project:**
 
-```sh
-npx skillman add vercel-labs/skills:find-skills anthropics/skills:skill-creator
+```bash
+npx skillman add \
+  vercel-labs/skills:find-skills \
+  anthropics/skills:skill-creator
 ```
 
 <p align="center">
