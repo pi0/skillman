@@ -1,6 +1,6 @@
 {
   "name": "skillman",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "CLI to manage project skills and lock them in skills.json",
   "license": "MIT",
   "repository": "pi0/skillman",

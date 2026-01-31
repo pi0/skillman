@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/pi0/skillman/compare/v0.0.4...v0.0.5)
+
+### 🚀 Enhancements
+
+- Allow adding skills with skills.sh base url ([14a465e](https://github.com/pi0/skillman/commit/14a465e))
+
+### 🩹 Fixes
+
+- Merge sources ([2d1a898](https://github.com/pi0/skillman/commit/2d1a898))
+
+### 🏡 Chore
+
+- Sync agents.md ([fbeda57](https://github.com/pi0/skillman/commit/fbeda57))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](https://github.com/pi0))
+
 ## v0.0.4
 
 [compare changes](https://github.com/pi0/skillman/compare/v0.0.3...v0.0.4)
