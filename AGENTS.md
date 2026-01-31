@@ -23,16 +23,20 @@ test/index.test.ts      # Tests using vitest
 - `readSkillsConfig(options?)` — Reads and validates `skills.json` (options: `{ cwd?, createIfNotExists? }`)
 - `updateSkillsConfig(updater, options?)` — Generic update with callback (options: `{ cwd?, createIfNotExists? }`, defaults `createIfNotExists: true`)
 - `addSkill(source, skills?, options?)` — Adds a skill source (options: `{ cwd?, createIfNotExists? }`, defaults `createIfNotExists: true`)
+- Auto-injects `$schema` field during validation if missing
 
 ### Skills CLI (src/skills.ts)
 
-- `findSkillsBinary(cwd?)` — Finds local `skills` binary in node_modules/.bin
+- `findSkillsBinary(options?)` — Finds local `skills` binary in node_modules/.bin (options: `{ cache? }`, cached by default)
 - `installSkills(options?)` — Spawns `skills add` for each source with progress logging; options: `{ cwd?, agents?, global?, yes? }`
+- `installSkillSource(entry, options)` — Installs a single skill source; options: `{ cwd?, agents?, global?, yes?, prefix? }`
 
 ### CLI Entry (src/cli.ts)
 
 - `main(argv?)` — CLI entry point using Node.js `parseArgs`
-- `parseSource(input)` — Parses `owner/repo:skill1:skill2` format into `{ source, skills }`
+- `parseSource(input)` — Parses source input into `{ source, skills }`; supports:
+  - Colon format: `owner/repo:skill1:skill2`
+  - skills.sh URLs: `https://skills.sh/owner/repo/skill-name`
 
 ### Utils (src/utils/)
 
@@ -44,19 +48,20 @@ test/index.test.ts      # Tests using vitest
 
 **gitignore.ts** — .gitignore management:
 
-- `findGitignore(cwd?)` — Finds `.gitignore` by traversing up from cwd
-- `addGitignoreEntry(entry, options?)` — Adds entry if not present (options: `{ cwd?, createIfNotExists? }`)
+- `findGitignore(cwd?)` — Finds `.gitignore` by traversing up from cwd (async)
+- `addGitignoreEntry(entries, options?)` — Adds entry/entries if not present; accepts `string | string[]` (options: `{ cwd?, createIfNotExists? }`)
 
 ### `skills.json` Schema
 
 ```ts
 interface SkillsConfig {
+  $schema?: string; // auto-injected if missing
   skills: SkillSource[];
 }
 
 interface SkillSource {
   source: string; // e.g., "vercel-labs/skills"
-  skills: string[]; // specific skills to install (empty = all)
+  skills?: string[]; // specific skills to install (empty/omitted = all)
 }
 ```
 
@@ -70,12 +75,13 @@ skillman add <source>... [--skill <name>...]  # Add skill source(s) to skills.js
 
 ### Source Format
 
-Sources can include inline skills using colon-separated syntax:
+Sources can include inline skills using colon-separated syntax or skills.sh URLs:
 
 ```sh
 skillman add owner/repo              # Add all skills from source
 skillman add owner/repo:pdf:commit   # Add specific skills inline
 skillman add org/a:skill1 org/b:skill2  # Multiple sources
+skillman add https://skills.sh/owner/repo/pdf  # skills.sh URL
 ```
 
 ### Options
