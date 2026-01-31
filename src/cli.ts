@@ -17,13 +17,20 @@ export function parseSource(input: string): { source: string; skills: string[] }
     if (!namespace || !repo) {
       return { source: input, skills: [] };
     }
-    const filtered = skills.map((s) => s.trim()).filter((s) => s.length > 0);
+    const filtered = skills
+      .flatMap((s) => s.split(","))
+      .map((s) => s.trim())
+      .filter(Boolean);
     return { source: `${namespace}/${repo}`, skills: filtered.includes("*") ? [] : filtered };
   }
 
-  const [source = "", ...skills] = input.split(":");
-  const filtered = skills.map((skill) => skill.trim()).filter((skill) => skill.length > 0);
-  return { source, skills: filtered.includes("*") ? [] : filtered };
+  const [source = "", ...parts] = input.split(":");
+  // Support both colon and comma separators: source:skill1,skill2:skill3
+  const skills = parts
+    .flatMap((p) => p.split(","))
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return { source, skills: skills.includes("*") ? [] : skills };
 }
 
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
@@ -32,7 +39,6 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     allowPositionals: true,
     options: {
       agent: { type: "string", multiple: true },
-      skill: { type: "string", multiple: true },
       global: { type: "boolean", short: "g" },
       help: { type: "boolean", short: "h" },
       version: { type: "boolean", short: "v" },
@@ -95,13 +101,9 @@ ${c.dim}$${c.reset} npx ${name} add ${c.cyan}vercel-labs/skills${c.reset}
     }
 
     const agents = values.agent || ["claude-code"];
-    const globalSkills = values.skill ?? [];
     const globalPrefix = values.global ? `${c.magenta}[ global ]${c.reset} ` : "";
 
-    for (const { source, skills: parsedSkills } of parsedSources) {
-      const skills =
-        parsedSkills.length === 0 ? [] : [...new Set([...parsedSkills, ...globalSkills])];
-
+    for (const { source, skills } of parsedSources) {
       await installSkillSource({ source, skills }, { agents, yes: true, global: values.global });
       await addSkill(source, skills);
       console.log(
@@ -120,17 +122,15 @@ function showUsage(command?: string): void {
 ${c.bold}Usage:${c.reset} ${c.cyan}${name} add${c.reset} <source>... [options]
 
 ${c.bold}Arguments:${c.reset}
-  ${c.cyan}<source>${c.reset}          Skill source ${c.dim}(e.g., vercel-labs/skills:pdf:commit)${c.reset}
+  ${c.cyan}<source>${c.reset}          Skill source ${c.dim}(e.g., vercel-labs/skills:pdf,commit)${c.reset}
 
 ${c.bold}Options:${c.reset}
-  ${c.cyan}--skill${c.reset} <name>    Specific skill to add ${c.dim}(can be repeated)${c.reset}
   ${c.cyan}--agent${c.reset} <name>    Target agent ${c.dim}(default: claude-code, can be repeated)${c.reset}
   ${c.cyan}-h, --help${c.reset}        Show this help message
 
 ${c.bold}Examples:${c.reset}
   ${c.dim}$${c.reset} ${name} add vercel-labs/skills
-  ${c.dim}$${c.reset} ${name} add vercel-labs/skills:pdf:commit
-  ${c.dim}$${c.reset} ${name} add vercel-labs/skills --skill pdf --skill commit
+  ${c.dim}$${c.reset} ${name} add vercel-labs/skills:pdf,commit
   ${c.dim}$${c.reset} ${name} add vercel-labs/skills:find-skills anthropics/skills:skill-creator
   ${c.dim}$${c.reset} ${name} add https://skills.sh/vercel-labs/skills/pdf
 `);
@@ -172,7 +172,7 @@ ${c.bold}Options:${c.reset}
 ${c.bold}Examples:${c.reset}
   ${c.dim}$${c.reset} ${name}                              ${c.dim}# Install all skills${c.reset}
   ${c.dim}$${c.reset} ${name} add vercel-labs/skills       ${c.dim}# Add a skill source${c.reset}
-  ${c.dim}$${c.reset} ${name} add owner/repo:pdf:commit    ${c.dim}# Add specific skills${c.reset}
+  ${c.dim}$${c.reset} ${name} add owner/repo:pdf,commit    ${c.dim}# Add specific skills${c.reset}
   ${c.dim}$${c.reset} ${name} add org/a:skill1 org/b:skill2 ${c.dim}# Add multiple sources${c.reset}
 
 Run ${c.cyan}${name} <command> --help${c.reset} for command-specific help.

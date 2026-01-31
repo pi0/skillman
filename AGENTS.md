@@ -35,7 +35,7 @@ test/index.test.ts      # Tests using vitest
 
 - `main(argv?)` — CLI entry point using Node.js `parseArgs`
 - `parseSource(input)` — Parses source input into `{ source, skills }`; supports:
-  - Colon format: `owner/repo:skill1:skill2`
+  - Colon/comma format: `owner/repo:skill1,skill2` or `owner/repo:skill1:skill2`
   - skills.sh URLs: `https://skills.sh/owner/repo/skill-name`
 
 ### Utils (src/utils/)
@@ -70,25 +70,25 @@ interface SkillSource {
 ```sh
 skillman                                    # Install skills (default)
 skillman install, i [--global] [--agent <name>...]  # Install skills from skills.json
-skillman add <source>... [--skill <name>...]  # Add skill source(s) to skills.json
+skillman add <source>... [--agent <name>...]  # Add skill source(s) to skills.json
 ```
 
 ### Source Format
 
-Sources can include inline skills using colon-separated syntax or skills.sh URLs:
+Sources can include inline skills using colon or comma-separated syntax, or skills.sh URLs:
 
 ```sh
-skillman add owner/repo              # Add all skills from source
-skillman add owner/repo:pdf:commit   # Add specific skills inline
-skillman add org/a:skill1 org/b:skill2  # Multiple sources
-skillman add https://skills.sh/owner/repo/pdf  # skills.sh URL
+skillman add vercel-labs/skills              # Add all skills from source
+skillman add owner/repo:pdf,commit           # Add specific skills inline
+skillman add org/repo-a:skill1 org/repo-b:skill2  # Multiple sources
+skillman add https://skills.sh/owner/repo/pdf     # skills.sh URL (https)
+skillman add skills.sh/owner/repo/pdf             # skills.sh URL (no protocol)
 ```
 
 ### Options
 
 - `--agent <name>` — Target agent (default: `claude-code`, repeatable)
 - `-g, --global` — Install skills globally (for `install` command)
-- `--skill <name>` — Specific skill to add (repeatable, combines with inline skills, for `add` command)
 - `-h, --help` — Show help
 - `-v, --version` — Show version
 

@@ -74,10 +74,9 @@ export async function installSkillSource(
   const skillsBinary = findSkillsBinary();
   const globalPrefix = options.global ? `${c.magenta}[ global ]${c.reset} ` : "";
 
-  const skillList =
-    (entry.skills?.length || 0) > 0 ? ` ${c.dim}(${entry.skills!.join(", ")})${c.reset}` : "";
+  const skillList = (entry.skills?.length || 0) > 0 ? entry.skills!.join(", ") : "all skills";
   console.log(
-    `${globalPrefix}${c.cyan}◐${c.reset} ${options.prefix || ""}Installing ${entry.source}${skillList}`,
+    `${globalPrefix}${c.cyan}◐${c.reset} ${options.prefix || ""}Installing ${c.cyan}${entry.source}${c.reset} ${c.dim}(${skillList})${c.reset}`,
   );
 
   const [command, args] = skillsBinary
