@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/pi0/skillman/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- `install --global` support ([3c0d88f](https://github.com/pi0/skillman/commit/3c0d88f))
+
+### 💅 Refactors
+
+- Improve add dx ([f58d4de](https://github.com/pi0/skillman/commit/f58d4de))
+
+### 🏡 Chore
+
+- Improve readme ([6cdbbee](https://github.com/pi0/skillman/commit/6cdbbee))
+
+### ❤️ Contributors
+
+- Pooya Parsa ([@pi0](https://github.com/pi0))
+
 ## v0.0.5
 
 [compare changes](https://github.com/pi0/skillman/compare/v0.0.4...v0.0.5)
