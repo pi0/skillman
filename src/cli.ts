@@ -33,6 +33,7 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
     options: {
       agent: { type: "string", multiple: true },
       skill: { type: "string", multiple: true },
+      global: { type: "boolean", short: "g" },
       help: { type: "boolean", short: "h" },
       version: { type: "boolean", short: "v" },
     },
@@ -61,7 +62,11 @@ ${c.dim}$${c.reset} npx ${name} add ${c.cyan}vercel-labs/skills${c.reset}
 `);
       return;
     }
-    await installSkills({ yes: true, agents: values.agent || ["claude-code"] });
+    await installSkills({
+      yes: true,
+      agents: values.agent || ["claude-code"],
+      global: values.global,
+    });
     return;
   }
 
@@ -91,14 +96,17 @@ ${c.dim}$${c.reset} npx ${name} add ${c.cyan}vercel-labs/skills${c.reset}
 
     const agents = values.agent || ["claude-code"];
     const globalSkills = values.skill ?? [];
+    const globalPrefix = values.global ? `${c.magenta}[ global ]${c.reset} ` : "";
 
     for (const { source, skills: parsedSkills } of parsedSources) {
       const skills =
         parsedSkills.length === 0 ? [] : [...new Set([...parsedSkills, ...globalSkills])];
 
-      await installSkillSource({ source, skills }, { agents, yes: true });
+      await installSkillSource({ source, skills }, { agents, yes: true, global: values.global });
       await addSkill(source, skills);
-      console.log(`${c.green}✔${c.reset} Added ${c.cyan}${source}${c.reset} to skills.json`);
+      console.log(
+        `${globalPrefix}${c.green}✔${c.reset} Added ${c.cyan}${source}${c.reset} to skills.json`,
+      );
     }
     return;
   }
@@ -135,10 +143,12 @@ ${c.bold}Usage:${c.reset} ${c.cyan}${name} install${c.reset} [options]
 
 ${c.bold}Options:${c.reset}
   ${c.cyan}--agent${c.reset} <name>    Target agent ${c.dim}(default: claude-code, can be repeated)${c.reset}
+  ${c.cyan}-g, --global${c.reset}      Install skills globally
   ${c.cyan}-h, --help${c.reset}        Show this help message
 
 ${c.bold}Examples:${c.reset}
   ${c.dim}$${c.reset} npx ${name} install
+  ${c.dim}$${c.reset} npx ${name} install --global
   ${c.dim}$${c.reset} npx ${name} install --agent claude-code --agent cursor
 `);
     return;

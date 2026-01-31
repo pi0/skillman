@@ -69,7 +69,7 @@ interface SkillSource {
 
 ```sh
 skillman                                    # Install skills (default)
-skillman install, i [--agent <name>...]     # Install skills from skills.json
+skillman install, i [--global] [--agent <name>...]  # Install skills from skills.json
 skillman add <source>... [--skill <name>...]  # Add skill source(s) to skills.json
 ```
 
@@ -87,7 +87,8 @@ skillman add https://skills.sh/owner/repo/pdf  # skills.sh URL
 ### Options
 
 - `--agent <name>` — Target agent (default: `claude-code`, repeatable)
-- `--skill <name>` — Specific skill to add (repeatable, combines with inline skills)
+- `-g, --global` — Install skills globally (for `install` command)
+- `--skill <name>` — Specific skill to add (repeatable, combines with inline skills, for `add` command)
 - `-h, --help` — Show help
 - `-v, --version` — Show version
 

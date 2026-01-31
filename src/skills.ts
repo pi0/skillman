@@ -48,7 +48,8 @@ export async function installSkills(options: InstallSkillsOptions = {}): Promise
 
   const total = config.skills.length;
   const totalStart = performance.now();
-  console.log(`🤹 Installing ${total} skill${total === 1 ? "" : "s"}...\n`);
+  const globalPrefix = options.global ? `${c.magenta}[ global ]${c.reset} ` : "";
+  console.log(`${globalPrefix}🤹 Installing ${total} skill${total === 1 ? "" : "s"}...\n`);
 
   let i = 0;
   for (const entry of config.skills) {
@@ -58,7 +59,7 @@ export async function installSkills(options: InstallSkillsOptions = {}): Promise
 
   const totalDuration = formatDuration(performance.now() - totalStart);
   console.log(
-    `🎉 Done! ${total} skill${total === 1 ? "" : "s"} installed in ${c.green}${totalDuration}${c.reset}.`,
+    `${globalPrefix}🎉 Done! ${total} skill${total === 1 ? "" : "s"} installed in ${c.green}${totalDuration}${c.reset}.`,
   );
 }
 
@@ -71,10 +72,13 @@ export async function installSkillSource(
   options: InstallSkillSourceOptions,
 ): Promise<void> {
   const skillsBinary = findSkillsBinary();
+  const globalPrefix = options.global ? `${c.magenta}[ global ]${c.reset} ` : "";
 
   const skillList =
     (entry.skills?.length || 0) > 0 ? ` ${c.dim}(${entry.skills!.join(", ")})${c.reset}` : "";
-  console.log(`${c.cyan}◐${c.reset} ${options.prefix || ""}Installing ${entry.source}${skillList}`);
+  console.log(
+    `${globalPrefix}${c.cyan}◐${c.reset} ${options.prefix || ""}Installing ${entry.source}${skillList}`,
+  );
 
   const [command, args] = skillsBinary
     ? [skillsBinary, ["add", entry.source]]
@@ -108,7 +112,7 @@ export async function installSkillSource(
   await runCommand(command, args);
   const skillDuration = formatDuration(performance.now() - skillStart);
   console.log(
-    `${c.green}✔${c.reset} Installed ${entry.source} ${c.dim}(${skillDuration})${c.reset}\n`,
+    `${globalPrefix}${c.green}✔${c.reset} Installed ${entry.source} ${c.dim}(${skillDuration})${c.reset}\n`,
   );
 }
 
