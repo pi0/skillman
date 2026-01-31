@@ -3,7 +3,7 @@
 import { parseArgs } from "node:util";
 
 import { c } from "./utils/colors.ts";
-import { addSkill } from "./config.ts";
+import { addSkill, findSkillsConfig } from "./config.ts";
 import { installSkills } from "./skills.ts";
 
 const name = "skillman";
@@ -11,7 +11,8 @@ const version = "0.0.0";
 
 function parseSource(input: string): { source: string; skills: string[] } {
   const [source = "", ...skills] = input.split(":");
-  return { source, skills };
+  const filtered = skills.map((skill) => skill.trim()).filter((skill) => skill.length > 0);
+  return { source, skills: filtered.includes("*") ? [] : filtered };
 }
 
 export async function main(argv: string[] = process.argv.slice(2)): Promise<void> {
@@ -39,6 +40,16 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
   }
 
   if (!command || command === "install" || command === "i") {
+    const skillsConfigPath = findSkillsConfig();
+    if (!skillsConfigPath) {
+      console.log(`${c.yellow}No skills.json found.${c.reset}
+
+Get started by adding a skill source:
+
+${c.dim}$${c.reset} npx ${name} add ${c.cyan}vercel-labs/skills${c.reset}
+`);
+      return;
+    }
     await installSkills({ yes: true, agents: values.agent || ["claude-code"] });
     return;
   }
@@ -53,7 +64,11 @@ export async function main(argv: string[] = process.argv.slice(2)): Promise<void
       const { source, skills: parsedSkills } = parseSource(rawSource);
       const skills = [...parsedSkills, ...(values.skill ?? [])];
       await addSkill(source, skills);
-      const skillsSuffix = skills.length > 0 ? ` ${c.dim}(${skills.join(", ")})${c.reset}` : "";
+      const normalizedSkills = skills
+        .map((skill) => skill.trim())
+        .filter((skill) => skill.length > 0 && skill !== "*");
+      const skillsSuffix =
+        normalizedSkills.length > 0 ? ` ${c.dim}(${normalizedSkills.join(", ")})${c.reset}` : "";
       console.log(
         `${c.green}✔${c.reset} Added ${c.cyan}${source}${c.reset} to skills.json${skillsSuffix}`,
       );
