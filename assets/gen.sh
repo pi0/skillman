@@ -11,7 +11,9 @@ trap cleanup EXIT
 
 # https://github.com/pamburus/termframe
 
-termframe -o "$SCRIPT_DIR/add.svg" --padding 2 -H auto --title "npx skillman add" -- pnpx skillman add skills.sh/vercel-labs/skills/find-skills anthropics/skills:skill-creator
+# termframe -o "$SCRIPT_DIR/add.svg" --padding 2 -H auto --title "npx skillman add" -- pnpx skillman add skills.sh/vercel-labs/skills/find-skills anthropics/skills:skill-creator
 
-termframe -o "$SCRIPT_DIR/install.svg" --padding 2 -H auto --title "npx skillman" -- pnpx skillman
+# termframe -o "$SCRIPT_DIR/install.svg" --padding 2 -H auto --title "npx skillman" -- pnpx skillman
+
+termframe -o "$SCRIPT_DIR/detect.svg" --padding 2 -H auto --title "npx skillman detect" -- node ../../src/cli.ts detect
 

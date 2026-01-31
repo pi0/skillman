@@ -1,0 +1,80 @@
+<svg height="428" width="688" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(32,16)">
+<filter filterUnits="userSpaceOnUse" height="436" id="shadow" width="696" x="-32" y="-24">
+<feGaussianBlur stdDeviation="12"/>
+</filter>
+<rect fill="#000000c0" filter="url(#shadow)" height="364" rx="10" ry="10" width="624" x="4" y="12"/>
+<rect fill="#282c34" height="364" rx="10" ry="10" width="624"/>
+<clipPath id="header">
+<rect height="28" width="624"/>
+</clipPath>
+<rect clip-path="url(#header)" fill="#383837" height="56" rx="10" ry="10" width="624"/>
+<line stroke="#000000c0" stroke-width="0.5" x1="0" x2="624" y1="28" y2="28"/><text dominant-baseline="central" fill="#b3b3b3" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" x="312" y="14">npx skillman detect</text>
+<g>
+<circle cx="14" cy="14" fill="#ff5f56" r="6" stroke="#ff5f56" stroke-width="0.5"/>
+<circle cx="34" cy="14" fill="#ffbd2e" r="6" stroke="#ffbd2e" stroke-width="0.5"/>
+<circle cx="54" cy="14" fill="#28c941" r="6" stroke="#28c941" stroke-width="0.5"/>
+</g>
+<svg class="terminal" font-family="JetBrains Mono, Fira Code, Source Code Pro, Cascadia Code, Consolas, Menlo, Monaco, DejaVu Sans Mono, monospace, Symbols Nerd Font Mono" font-size="12" height="336" width="624" y="28">
+<svg fill="#dcdfe4" x="24" y="24">
+<g>
+<svg height="288" viewBox="0 0 48 24" width="576">
+<g stroke-width="0.025"/>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="0">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4">🔍</tspan><tspan fill="#dcdfe4" x="1.8em">Detecting </tspan><tspan fill="#dcdfe4">skills </tspan><tspan fill="#dcdfe4">in </tspan><tspan fill="#dcdfe4">current </tspan><tspan fill="#dcdfe4">project </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="28.8">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4" font-weight="bold">Detected:</tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="43.2">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">packageManager</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">pnpm </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="57.6">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">frameworks</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">- </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="72">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">languages</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">- </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="86.4">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">tools</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">- </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="100.8">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">testing</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">- </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="115.2">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">searchTerms</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">- </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="144">
+<text xml:space="preserve" y="0.96em"><tspan fill="#98c379">✔</tspan><tspan fill="#dcdfe4" x="1.2em">Updated </tspan><tspan fill="#dcdfe4">skills.json </tspan><tspan fill="#dcdfe4">with </tspan><tspan fill="#dcdfe4">detected </tspan><tspan fill="#dcdfe4">information. </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="172.8">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4" font-weight="bold">Searching </tspan><tspan fill="#dcdfe4" font-weight="bold">for </tspan><tspan fill="#dcdfe4" font-weight="bold">suggested </tspan><tspan fill="#dcdfe4" font-weight="bold">skills...</tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="201.6">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4" font-weight="bold">Suggested </tspan><tspan fill="#dcdfe4" font-weight="bold">Skills:</tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="216">
+<text xml:space="preserve" y="0.96em"><tspan fill="#56b6c2" x="1.2em">antfu/skills</tspan><tspan fill="#dcdfe4">: </tspan><tspan fill="#dcdfe4">pnpm </tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="244.8">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4" opacity="0.5">Use </tspan><tspan fill="#dcdfe4" opacity="0.5">command </tspan><tspan fill="#dcdfe4" opacity="0.5">below </tspan><tspan fill="#dcdfe4" opacity="0.5">to </tspan><tspan fill="#dcdfe4" opacity="0.5">install </tspan><tspan fill="#dcdfe4" opacity="0.5">all </tspan><tspan fill="#dcdfe4" opacity="0.5">detected </tspan><tspan fill="#dcdfe4" opacity="0.5">skills:</tspan></text>
+</svg>
+<svg height="14.4" overflow="hidden" width="576" y="273.6">
+<text xml:space="preserve" y="0.96em"><tspan fill="#dcdfe4">npx </tspan><tspan fill="#dcdfe4">skillman </tspan><tspan fill="#dcdfe4">add </tspan><tspan fill="#dcdfe4">antfu/skills:pnpm </tspan></text>
+</svg>
+</g>
+</svg>
+</svg>
+<rect fill="none" height="364" rx="10" ry="10" stroke="#000000" stroke-width="0.5" width="624"/>
+<rect fill="none" height="362" rx="9" ry="9" stroke="#f0f0f080" stroke-width="0.5" width="622" x="1" y="1"/>
+</g>
+<style>
+@font-face {
+	font-family: JetBrains Mono;
+	font-weight: 100 800;
+	font-style: normal;
+	src: url(https://raw.githubusercontent.com/pamburus/fonts/refs/heads/main/JetBrainsMono/fonts/variable/JetBrainsMono%5Bwght%5D.woff2) format('woff2');
+}
+</style>
+</svg>

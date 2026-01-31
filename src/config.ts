@@ -1,9 +1,11 @@
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
+import type { DetectionResult } from "skills-detector";
 
 export interface SkillsConfig {
   $schema?: string;
+  detected?: DetectionResult;
   skills: SkillSource[];
 }
 

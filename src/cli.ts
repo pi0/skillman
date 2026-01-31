@@ -4,6 +4,7 @@ import { parseArgs } from "node:util";
 
 import { c } from "./utils/colors.ts";
 import { addSkill, findSkillsConfig } from "./config.ts";
+import { detectSkills } from "./detect.ts";
 import { installSkillSource, installSkills } from "./skills.ts";
 
 const name = "skillman";
@@ -113,6 +114,11 @@ ${c.dim}$${c.reset} npx ${name} add ${c.cyan}vercel-labs/skills${c.reset}
     return;
   }
 
+  if (command === "detect") {
+    await detectSkills();
+    return;
+  }
+
   throw new Error(`Unknown command: ${command}`);
 }
 
@@ -154,6 +160,18 @@ ${c.bold}Examples:${c.reset}
     return;
   }
 
+  if (command === "detect") {
+    console.log(`
+${c.bold}Usage:${c.reset} ${c.cyan}${name} detect${c.reset}
+
+Detect project stack and save to skills.json.
+
+${c.bold}Examples:${c.reset}
+  ${c.dim}$${c.reset} npx ${name} detect
+`);
+    return;
+  }
+
   console.log(`
 ${c.bold}${name}${c.reset} ${c.dim}v${version}${c.reset}
 
@@ -164,6 +182,7 @@ ${c.bold}Usage:${c.reset} ${c.cyan}${name}${c.reset} <command> [options]
 ${c.bold}Commands:${c.reset}
   ${c.cyan}install, i${c.reset}        Install skills from skills.json ${c.dim}(default)${c.reset}
   ${c.cyan}add${c.reset}               Add a skill source to skills.json
+  ${c.cyan}detect${c.reset}            Detect project stack and save to skills.json
 
 ${c.bold}Options:${c.reset}
   ${c.cyan}-h, --help${c.reset}        Show help for a command
