@@ -37,7 +37,7 @@
     "oxfmt": "latest",
     "oxlint": "latest",
     "skillman": "link:.",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vitest": "latest"
   },
   "packageManager": "pnpm@10.28.2"
